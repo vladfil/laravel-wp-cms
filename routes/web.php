@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // User
-Route::get('/login', [UserController::class, 'login'])->middleware('guest');
-Route::get('/register', [UserController::class, 'register'])->middleware('guest');
-Route::get('/restore', [UserController::class, 'restore'])->middleware('guest');
+Route::get('/login', [UserController::class, 'login']);
+Route::get('/register', [UserController::class, 'create']);
+Route::get('/restore', [UserController::class, 'restore']);
+Route::post('/users', [UserController::class, 'store']);
+Route::post('/authenticate', [UserController::class, 'authenticate']);
