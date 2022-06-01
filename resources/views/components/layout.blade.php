@@ -15,7 +15,9 @@
 
 <body>
   <div class="min-h-screen">
-    {{$slot}}
+    <x-card>
+      {{$slot}}
+    </x-card>
   </div>
 </body>
 

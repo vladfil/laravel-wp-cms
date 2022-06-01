@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class UserController extends Controller
 {
@@ -34,18 +35,20 @@ class UserController extends Controller
 
         $user = new User($data);
         $user->save();
+        $user->sendEmailVerificationNotification();
+
         Auth::login($user);
 
-        return redirect('/')
-            ->with('message', "Hi {$user->user}! Your email {$user->email} successfully registered");
+        return redirect('/email/verify')
+            ->with('message', "Hi {$user->user}! Please check your email {$user->email}, for verification.");
     }
 
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
+        $user = $user = User::where('email', $request->email)->first();
 
-        if ($user = Auth::attempt($credentials)) {
-            $user = $user = User::where('email', $request->email)->first();
+        if (Auth::attempt($credentials) && $user->hasVerifiedEmail()) {
             $request->session()->regenerate();
             return redirect()->intended('/')
                 ->with('message', "Hi {$user->name}! Your has successfully authenticated");
