@@ -1,6 +1,6 @@
 <x-layout>
   <x-card>
-    <form action="/email/resend" method="post" class="mx-auto my-0 px-8 pt-6 pb-8 mb-4">
+    <form action="/forgot-password" method="post" class="mx-auto my-0 px-8 pt-6 pb-8 mb-4">
       @csrf
 
       <div class="mb-4">
@@ -9,7 +9,10 @@
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="Email" type="text" name="email" placeholder="Email">
+          id="Email" type="email" name="email" placeholder="Email">
+        @error('email')
+        <div class="text-red-700 text-xs mt-3">{{ $message }}</div>
+        @enderror
       </div>
 
       <div class="flex items-center justify-between">
