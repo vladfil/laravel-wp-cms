@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\EmailVerifyController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +20,26 @@ Route::get('/', function () {
 })->name('home');
 
 // User
-Route::get('/login', [UserController::class, 'login']);
-Route::get('/register', [UserController::class, 'create']);
-Route::get('/restore', [UserController::class, 'restore']);
-Route::post('/users', [UserController::class, 'store']);
-Route::post('/authenticate', [UserController::class, 'authenticate']);
+Route::get('/register', [UserController::class, 'create'])
+    ->middleware('guest');
+Route::post('/users', [UserController::class, 'store'])
+    ->middleware('guest');
 
-Route::get('/email/verify/{id}/{hash}', [EmailVerifyController::class, 'verify'])
-    ->middleware(['auth', 'signed'])->name('verification.verify');
-Route::get('/email/verify', [EmailVerifyController::class, 'verifyMessage'])
-    ->middleware('auth')->name('verification.notice');
-Route::post('/email/resend', [EmailVerifyController::class, 'resend'])
-    ->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+// Auth
+Route::get('/login', [AuthController::class, 'login'])
+    ->middleware('guest');
+Route::get('/logout', [AuthController::class, 'logout'])
+    ->middleware('auth');
+Route::get('/restore', [AuthController::class, 'restore'])
+    ->middleware('guest');
+Route::post('/authenticate', [AuthController::class, 'authenticate'])
+    ->middleware('guest');
+Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verify'])
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
+Route::get('/email/verify', [AuthController::class, 'verifyMessage'])
+    ->middleware('auth')
+    ->name('verification.notice');
+Route::post('/email/resend', [AuthController::class, 'resend'])
+    // ->middleware(['auth', 'throttle:6,1'])
+    ->name('verification.send');
