@@ -30,9 +30,7 @@
   @endif
 
   <div class="min-h-screen">
-    <x-card>
-      {{$slot}}
-    </x-card>
+    {{$slot}}
   </div>
 </body>
 

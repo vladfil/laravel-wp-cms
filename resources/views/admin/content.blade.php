@@ -1,0 +1,1 @@
+<div class="flex-auto bg-red min-h-screen"></div>

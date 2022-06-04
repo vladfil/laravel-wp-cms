@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminPanelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,9 @@ Route::get('/reset-password/{token}', [AuthController::class, 'resetPassword'])
 Route::post('/reset-password', [AuthController::class, 'resetPasswordHandler'])
     ->middleware('guest')
     ->name('password.update');
+
+/**
+ * AdminPanelController Routes
+ */
+Route::get('/admin', AdminPanelController::class)
+    ->middleware('auth');
