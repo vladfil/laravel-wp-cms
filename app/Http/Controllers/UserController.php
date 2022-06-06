@@ -10,7 +10,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.index', ['menuList' => auth()->user()->getMenuList()]);
+        return view('user.index', [
+            'menuList' => auth()->user()->getMenuList(),
+            'users' => User::paginate(20),
+        ]);
     }
 
     public function create()
