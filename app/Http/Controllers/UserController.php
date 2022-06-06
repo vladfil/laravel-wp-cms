@@ -64,4 +64,14 @@ class UserController extends Controller
         $user->delete();
         return back()->with('message', 'User deleted successfully');
     }
+
+    public function destroySelected(Request $request)
+    {
+        if ($request->action === 'deleteSelected' && count($request->users)) {
+            User::destroy($request->users);
+            return back()->with('message', 'Selected users deleted successfully');
+        }
+
+        return back();
+    }
 }

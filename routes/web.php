@@ -71,4 +71,5 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
     Route::get('/users/{user}/edit', [UserController::class, 'edit']);
     Route::patch('/users/{user}', [UserController::class, 'update']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
+    Route::delete('/users', [UserController::class, 'destroySelected']);
 });
