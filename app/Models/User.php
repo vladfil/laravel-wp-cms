@@ -43,6 +43,13 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeFilter($query, $filters)
+    {
+        if ($filters['s'] ?? false) {
+            $query->where('name', 'like', '%' . $filters['s'] . '%');
+        }
+    }
+
     public function getMenuList()
     {
         $menuList = [
