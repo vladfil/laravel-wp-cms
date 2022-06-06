@@ -113,6 +113,6 @@ class AuthController extends Controller
 
         return $status === Password::PASSWORD_RESET
             ? redirect('/login')->with('message', __($status))
-            : back()->withErrors(['message' => [__($status)]]);
+            : back()->withErrors(['email' => [__($status)]]);
     }
 }

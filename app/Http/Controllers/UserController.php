@@ -38,6 +38,30 @@ class UserController extends Controller
         Auth::login($user);
 
         return redirect('/email/verify')
-            ->with('message', "Hi {$user->user}! Please check your email {$user->email}, for verification.");
+            ->with('message', "Hi {$user->name}! Please check your email {$user->email}, for verification.");
+    }
+
+    public function edit(User $user)
+    {
+        return view('user.edit', [
+            'user' => $user,
+        ]);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => 'required|min:3',
+        ]);
+
+        return $user->update($request->all()) ?
+            back()->with('message', "User {$user->name} successfully updated") :
+            back()->withErrors(['email' => 'User not updated']);
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return back()->with('message', 'User deleted successfully');
     }
 }
