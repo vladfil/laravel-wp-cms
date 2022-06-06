@@ -18,7 +18,7 @@
       </div>
     </aside>
 
-    <div class="flex-auto bg-red min-h-screen">
+    <div class="flex-auto bg-red min-h-screen p-10">
       {{$slot}}
     </div>
   </div>

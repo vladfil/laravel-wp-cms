@@ -1,3 +1,3 @@
 <x-admin :menuList="$user->getMenuList()">
-  <h1 class="font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600">{{$user->name}}</h1>
+  <h4 class="font-medium leading-tight text-2xl mt-0 mb-2 text-blue-600">Welcome, {{$user->name}}!</h4>
 </x-admin>
