@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials) && $user->hasVerifiedEmail()) {
             $request->session()->regenerate();
-            return redirect()->intended('/')
+            return redirect()->intended('/admin')
                 ->with('message', "Hi {$user->name}! Your has successfully authenticated");
         }
 

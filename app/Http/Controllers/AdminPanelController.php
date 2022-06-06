@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class AdminPanelController extends Controller
 {
     /**
@@ -12,26 +10,8 @@ class AdminPanelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        // auth()->user();
-        $menuList = [
-            [
-                'uri' => '/users',
-                'icon' => 'fa-user',
-                'label' => 'Users',
-            ],
-            [
-                'uri' => '/images',
-                'icon' => 'fa-image',
-                'label' => 'Images',
-            ],
-            [
-                'uri' => '/posts',
-                'icon' => 'fa-newspaper',
-                'label' => 'Posts',
-            ],
-        ];
-        return view('admin.index', ['menuList' => $menuList]);
+        return view('admin.index', ['user' => auth()->user()]);
     }
 }

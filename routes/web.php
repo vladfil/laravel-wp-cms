@@ -65,5 +65,7 @@ Route::post('/reset-password', [AuthController::class, 'resetPasswordHandler'])
 /**
  * AdminPanelController Routes
  */
-Route::get('/admin', AdminPanelController::class)
-    ->middleware('auth');
+Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
+    Route::get('/', AdminPanelController::class);
+    Route::get('/users', [UserController::class, 'index']);
+});

@@ -42,4 +42,37 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getMenuList()
+    {
+        $menuList = [
+            [
+                'uri' => '/admin/users',
+                'icon' => 'fa-users',
+                'label' => 'Users',
+            ],
+            [
+                'uri' => '/admin/images',
+                'icon' => 'fa-images',
+                'label' => 'Images',
+            ],
+            [
+                'uri' => '/admin/posts',
+                'icon' => 'fa-newspaper',
+                'label' => 'Posts',
+            ],
+            [
+                'uri' => '/admin/settings',
+                'icon' => 'fa-gears',
+                'label' => 'User Settings',
+            ],
+            [
+                'uri' => '/logout',
+                'icon' => 'fa-arrow-right-from-bracket',
+                'label' => 'Logout',
+            ],
+        ];
+
+        return $menuList;
+    }
 }
